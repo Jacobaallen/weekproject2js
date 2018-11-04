@@ -3,7 +3,7 @@ let  readlineSync  =  require('readline-sync');
 let choices = ['heads', 'tails'];
 let score = {gambler: 0};
 let rounds = 0;
-let i = 0;
+
 
 
 function getUserChoice() {
@@ -25,37 +25,50 @@ function getHouseChoice(userChoice) {
   }
   if(userChoice === index) {
     console.log('YOUR THE BIG WINNER!!!');
-    winnings();
+    let st = 'w'
+    pScore(st);
   }
   else {
    console.log('Try again, for another chance.')
-   lossings();
+   let st = 'l'
+   pScore(st);
  }
   let houseChoice = index;
   return houseChoice;
 }
 
 
-  function winnings() {
-    score.gambler += 10
-    console.log(`Your winnings are now ${score.gambler}`)
+  function pScore(stat) {
+    if (stat == "w")
+    score.gambler += 10;
+    else {
+      score.gambler -= 5;
+    }
+    console.log(`Your winnings are now ${score.gambler}`);
 }
 
 
-  function lossings() {
-    score.gambler -= 5
-    console.log(`Your lossings are now ${score.gambler}`)
+function cPlaying() {
+  continuePlaying = readlineSync.question('Do you want to keep playing? (y/n): ');
+  if(continuePlaying.toLowerCase() == 'n') {
+      console.log('Thanks for ganbling!');
+   } else {
+      setGame();
+ }
 }
 
-
- function game() {
+ function fullGame() {
      getUserChoice();
      getHouseChoice(userChoice);
+
  }
 
+ function setGame(){
+   for(let i = 0; i < 5; i++) {
+     fullGame();
+   }
+   cPlaying();
+  }
 
-do {
-  game();
-  i++
-}
-while (i < 5)
+
+setGame();
