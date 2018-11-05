@@ -44,7 +44,7 @@ function getHouseChoice(userChoice) {
     else {
       score.gambler -= 5;
     }
-    console.log(`Your winnings are now ${score.gambler}`);
+    console.log(`Your winnings are now $${score.gambler}.00`);
 }
 
 
